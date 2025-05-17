@@ -61,21 +61,30 @@ func main() {
 
 	var lift float64
 	var reps int
-	var discipline, formula string
-	
+	var formulaPreference, formula string
+
 	fmt.Println("Please, enter your lift and rep count...")
 	fmt.Scan(&lift, &reps)
-	fmt.Printf("%g x %d", lift, reps)
-	fmt.Println()
 
-	fmt.Println("SBD?")
-	fmt.Scan(&discipline)
+	if lift <= 0 || reps <= 0 {
+		fmt.Println("Please enter positive values for lift and reps.")
+		return
+	}
 
-	if(discipline == "S" || discipline == "D") {
+	fmt.Printf("%g x %d\n", lift, reps)
+
+	fmt.Println("Epley (S/D) or Brzycki (B)?")
+	fmt.Scan(&formulaPreference)
+
+	switch formulaPreference {
+	case "S", "D":
 		fmt.Println("Using Epley")
 		formula = "ep"
-	} else {
+	case "B":
 		fmt.Println("Using Brzycki")
+		formula = "br"
+	default:
+		fmt.Println("Invalid formula preference. Using Brzycki")
 		formula = "br"
 	}
 
